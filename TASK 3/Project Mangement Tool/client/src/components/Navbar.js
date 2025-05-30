@@ -13,7 +13,7 @@ const NavigationBar = () => {
   };
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/dashboard">Project Management</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

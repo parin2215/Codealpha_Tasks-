@@ -29,6 +29,21 @@ const projectSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
+  groups: [{
+    name: {
+      type: String,
+      required: [true, 'Group name is required'],
+      trim: true
+    },
+    members: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }],
+    createdAt: {
+      type: Date,
+      default: Date.now
+    }
+  }],
   team: [{
     user: {
       type: mongoose.Schema.Types.ObjectId,

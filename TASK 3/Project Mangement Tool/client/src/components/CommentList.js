@@ -27,7 +27,7 @@ const CommentList = ({ projectId, taskId }) => {
 
   useEffect(() => {
     fetchComments();
-  }, [projectId, taskId, fetchComments]);
+  }, [projectId, taskId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -93,9 +93,7 @@ const CommentList = ({ projectId, taskId }) => {
               placeholder="Write a comment..."
             />
           </Form.Group>
-          <Button type="submit" variant="primary">
-            Post Comment
-          </Button>
+          <Button type="submit" variant="primary">Post Comment</Button>
         </Form>
 
         <ListGroup className="mt-3">
@@ -116,9 +114,7 @@ const CommentList = ({ projectId, taskId }) => {
                     onClick={() => handleLike(comment._id)}
                   >
                     <i className={`bi bi-heart${comment.likes.includes(user._id) ? '-fill' : ''}`}></i>
-                    <Badge bg="secondary" className="ms-1">
-                      {comment.likes.length}
-                    </Badge>
+                    <Badge bg="secondary" className="ms-1">{comment.likes.length}</Badge>
                   </Button>
                   {comment.author._id === user._id && (
                     <Button

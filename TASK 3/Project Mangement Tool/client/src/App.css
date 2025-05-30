@@ -2,37 +2,80 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: var(--background-color-light);
+  color: var(--text-color-dark);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Custom styles for professional color scheme */
+
+.navbar {
+  background-color: var(--background-color-dark) !important;
+  padding: 1rem 3rem; /* Increased horizontal padding for a more spacious feel */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.navbar .navbar-brand {
+  color: var(--text-color-light) !important;
+  font-size: 1.4rem; /* Slightly larger font size for brand */
+  font-weight: bold;
+  margin-right: 2rem; /* Increased space between brand and nav links */
 }
 
-.App-link {
-  color: #61dafb;
+.navbar .nav-link,
+.navbar .dropdown-toggle {
+  color: var(--text-color-light) !important;
+  padding: 0.75rem 1rem; /* Adjusted link padding */
+  margin-right: 0.5rem; /* Reduced margin between links */
+  transition: color 0.3s ease-in-out; /* Smooth color transition on hover */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar .nav-link:last-child,
+.navbar .dropdown-toggle:last-child {
+    margin-right: 0;
+}
+
+.navbar .nav-link:hover,
+.navbar .dropdown-toggle:hover {
+  color: var(--secondary-color) !important; /* Change color on hover */
+  text-decoration: none; /* Remove underline on hover if present */
+}
+
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255, 255, 255, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3csvg/");
+}
+
+.card {
+  border-color: var(--border-color);
+}
+
+.card-header {
+  background-color: var(--background-color-light);
+  border-bottom-color: var(--border-color);
+  color: var(--text-color-dark);
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+.btn-outline-primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+  color: var(--text-color-light);
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
 }

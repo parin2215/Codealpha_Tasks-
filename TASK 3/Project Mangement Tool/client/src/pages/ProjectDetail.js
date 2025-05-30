@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Container, Row, Col, Card, Button, Form, ListGroup, Modal, Alert } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -22,11 +22,7 @@ const ProjectDetail = () => {
   const [showTaskModal, setShowTaskModal] = useState(false);
   const [taskError, setTaskError] = useState('');
 
-  useEffect(() => {
-    fetchProjectDetails();
-  }, [id, fetchProjectDetails]);
-
-  const fetchProjectDetails = async () => {
+  const fetchProjectDetails = useCallback(async () => {
     try {
       const [projectRes, tasksRes] = await Promise.all([
         axios.get(`http://localhost:5000/api/projects/${id}`),
@@ -39,14 +35,17 @@ const ProjectDetail = () => {
       setError('Failed to fetch project details');
       setLoading(false);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    fetchProjectDetails();
+  }, [fetchProjectDetails]);
 
   const handleCreateTask = async (e) => {
     e.preventDefault();
     setTaskError('');
     
     try {
-      // Format the date to ISO string
       const taskData = {
         ...newTask,
         dueDate: new Date(newTask.dueDate).toISOString(),
@@ -84,27 +83,19 @@ const ProjectDetail = () => {
 
   const getPriorityColor = (priority) => {
     switch (priority) {
-      case 'high':
-        return 'danger';
-      case 'medium':
-        return 'warning';
-      case 'low':
-        return 'success';
-      default:
-        return 'secondary';
+      case 'high': return 'danger';
+      case 'medium': return 'warning';
+      case 'low': return 'success';
+      default: return 'secondary';
     }
   };
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'todo':
-        return 'secondary';
-      case 'in-progress':
-        return 'primary';
-      case 'completed':
-        return 'success';
-      default:
-        return 'secondary';
+      case 'todo': return 'secondary';
+      case 'in-progress': return 'primary';
+      case 'completed': return 'success';
+      default: return 'secondary';
     }
   };
 
@@ -120,9 +111,7 @@ const ProjectDetail = () => {
           <p className="text-muted">{project.description}</p>
         </Col>
         <Col xs="auto">
-          <Button variant="primary" onClick={() => setShowTaskModal(true)}>
-            Add Task
-          </Button>
+          <Button variant="primary" onClick={() => setShowTaskModal(true)}>Add Task</Button>
         </Col>
       </Row>
 
@@ -140,21 +129,13 @@ const ProjectDetail = () => {
                       <h5>{task.title}</h5>
                       <p className="mb-1">{task.description}</p>
                       <div>
-                        <span className={`badge bg-${getPriorityColor(task.priority)} me-2`}>
-                          {task.priority}
-                        </span>
-                        <span className={`badge bg-${getStatusColor(task.status)}`}>
-                          {task.status}
-                        </span>
+                        <span className={`badge bg-${getPriorityColor(task.priority)} me-2`}>{task.priority}</span>
+                        <span className={`badge bg-${getStatusColor(task.status)}`}>{task.status}</span>
                         {task.dueDate && (
-                          <span className="ms-2 text-muted">
-                            Due: {new Date(task.dueDate).toLocaleDateString()}
-                          </span>
+                          <span className="ms-2 text-muted">Due: {new Date(task.dueDate).toLocaleDateString()}</span>
                         )}
                         {task.assignedTo && (
-                          <span className="ms-2 text-muted">
-                            Assigned to: {task.assignedTo.name}
-                          </span>
+                          <span className="ms-2 text-muted">Assigned to: {task.assignedTo.name}</span>
                         )}
                       </div>
                     </div>
@@ -183,11 +164,7 @@ const ProjectDetail = () => {
               <p><strong>Status:</strong> {project.status}</p>
               <p><strong>Start Date:</strong> {new Date(project.startDate).toLocaleDateString()}</p>
               <p><strong>End Date:</strong> {new Date(project.endDate).toLocaleDateString()}</p>
-              <Button
-                variant="outline-primary"
-                onClick={() => navigate(`/projects/${id}/edit`)}
-                className="w-100"
-              >
+              <Button variant="outline-primary" onClick={() => navigate(`/projects/${id}/edit`)} className="w-100">
                 Edit Project
               </Button>
             </Card.Body>
@@ -195,7 +172,6 @@ const ProjectDetail = () => {
         </Col>
       </Row>
 
-      {/* Comments section */}
       <CommentList projectId={project._id} />
 
       <Modal show={showTaskModal} onHide={() => setShowTaskModal(false)}>
@@ -207,65 +183,29 @@ const ProjectDetail = () => {
           <Form onSubmit={handleCreateTask}>
             <Form.Group className="mb-3">
               <Form.Label>Title</Form.Label>
-              <Form.Control
-                type="text"
-                value={newTask.title}
-                onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-                required
-              />
+              <Form.Control type="text" value={newTask.title} onChange={(e) => setNewTask({ ...newTask, title: e.target.value })} required />
             </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>Description</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                value={newTask.description}
-                onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
-                required
-              />
+              <Form.Control as="textarea" rows={3} value={newTask.description} onChange={(e) => setNewTask({ ...newTask, description: e.target.value })} required />
             </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>Due Date</Form.Label>
-              <Form.Control
-                type="date"
-                value={newTask.dueDate}
-                onChange={(e) => setNewTask({ ...newTask, dueDate: e.target.value })}
-                required
-              />
+              <Form.Control type="date" value={newTask.dueDate} onChange={(e) => setNewTask({ ...newTask, dueDate: e.target.value })} required />
             </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>Priority</Form.Label>
-              <Form.Select
-                value={newTask.priority}
-                onChange={(e) => setNewTask({ ...newTask, priority: e.target.value })}
-              >
+              <Form.Select value={newTask.priority} onChange={(e) => setNewTask({ ...newTask, priority: e.target.value })}>
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
                 <option value="high">High</option>
               </Form.Select>
             </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Assigned To</Form.Label>
-              <Form.Select
-                value={newTask.assignedTo}
-                onChange={(e) => setNewTask({ ...newTask, assignedTo: e.target.value })}
-              >
-                <option value="">Select Assignee</option>
-                {project.team.map(member => (
-                  <option key={member.user._id} value={member.user._id}>
-                    {member.user.name}
-                  </option>
-                ))}
-              </Form.Select>
-            </Form.Group>
-
-            <Button variant="primary" type="submit">
-              Add Task
-            </Button>
+            <Button variant="primary" type="submit">Create Task</Button>
           </Form>
         </Modal.Body>
       </Modal>

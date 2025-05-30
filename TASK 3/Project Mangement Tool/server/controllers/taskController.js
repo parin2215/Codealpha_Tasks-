@@ -16,13 +16,14 @@ exports.getTasks = async (req, res) => {
 // Create a new task
 exports.createTask = async (req, res) => {
   try {
+    // Find the project and check if the user is in the team
     const project = await Project.findOne({
       _id: req.params.projectId,
-      createdBy: req.user._id
+      'team.user': req.user._id
     });
 
     if (!project) {
-      return res.status(404).json({ message: 'Project not found' });
+      return res.status(404).json({ message: 'Project not found or you do not have permission to add tasks to this project' });
     }
 
     const { title, description, status, priority, dueDate, assignedTo } = req.body;

@@ -20,7 +20,7 @@ const EditProject = () => {
 
   useEffect(() => {
     fetchProject();
-  }, [id, fetchProject]);
+  }, [id]);
 
   const fetchProject = async () => {
     try {
@@ -64,34 +64,17 @@ const EditProject = () => {
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
             <Form.Label>Title</Form.Label>
-            <Form.Control
-              type="text"
-              name="title"
-              value={project.title}
-              onChange={handleChange}
-              required
-            />
+            <Form.Control type="text" name="title" value={project.title} onChange={handleChange} required />
           </Form.Group>
 
           <Form.Group className="mb-3">
             <Form.Label>Description</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={3}
-              name="description"
-              value={project.description}
-              onChange={handleChange}
-              required
-            />
+            <Form.Control as="textarea" rows={3} name="description" value={project.description} onChange={handleChange} required />
           </Form.Group>
 
           <Form.Group className="mb-3">
             <Form.Label>Status</Form.Label>
-            <Form.Select
-              name="status"
-              value={project.status}
-              onChange={handleChange}
-            >
+            <Form.Select name="status" value={project.status} onChange={handleChange}>
               <option value="active">Active</option>
               <option value="completed">Completed</option>
               <option value="on-hold">On Hold</option>
@@ -100,32 +83,16 @@ const EditProject = () => {
 
           <Form.Group className="mb-3">
             <Form.Label>Start Date</Form.Label>
-            <Form.Control
-              type="date"
-              name="startDate"
-              value={project.startDate}
-              onChange={handleChange}
-              required
-            />
+            <Form.Control type="date" name="startDate" value={project.startDate} onChange={handleChange} required />
           </Form.Group>
 
           <Form.Group className="mb-3">
             <Form.Label>End Date</Form.Label>
-            <Form.Control
-              type="date"
-              name="endDate"
-              value={project.endDate}
-              onChange={handleChange}
-              required
-            />
+            <Form.Control type="date" name="endDate" value={project.endDate} onChange={handleChange} required />
           </Form.Group>
 
-          <Button variant="primary" type="submit">
-            Update Project
-          </Button>
-          <Button variant="secondary" className="ms-2" onClick={() => navigate(-1)}>
-            Cancel
-          </Button>
+          <Button variant="primary" type="submit">Update Project</Button>
+          <Button variant="secondary" className="ms-2" onClick={() => navigate(-1)}>Cancel</Button>
         </Form>
       </Container>
     </>
