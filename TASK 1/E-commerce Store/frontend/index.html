@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Shop - Your Online Store</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--bg-secondary);
+            margin-bottom: 3rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 1rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Featured Categories */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-card {
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .category-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .category-info h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .category-info p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .category-link {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--accent-primary);
+            color: var(--bg-secondary);
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .category-link:hover {
+            background: var(--accent-secondary);
+            transform: translateY(-2px);
+        }
+
+        /* Featured Products */
+        .featured-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            background: var(--accent-primary);
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            border-radius: var(--border-radius);
+        }
+
+        .newsletter h2 {
+            color: var(--bg-secondary);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            color: var(--bg-secondary);
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+
+        .newsletter-form button {
+            padding: 1rem 2rem;
+            background: var(--success);
+            color: var(--bg-secondary);
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .newsletter-form button:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                height: 300px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-form button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">E-Shop</div>
+        <div class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="cart.html" class="cart-link">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cart-count">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Welcome to E-Shop</h1>
+            <p>Discover amazing products at unbeatable prices</p>
+            <a href="#products" class="category-link">Shop Now</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="featured-section">
+            <div class="section-header">
+                <h2>Featured Categories</h2>
+                <p>Explore our wide range of products across different categories</p>
+            </div>
+            <div class="categories">
+                <div class="category-card">
+                    <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" 
+                         alt="Electronics" 
+                         class="category-image">
+                    <div class="category-info">
+                        <h3>Electronics</h3>
+                        <p>Latest gadgets and tech accessories</p>
+                        <a href="#electronics" class="category-link" data-category="electronics">View Products</a>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" 
+                         alt="Clothing" 
+                         class="category-image">
+                    <div class="category-info">
+                        <h3>Clothing</h3>
+                        <p>Trendy clothing and accessories</p>
+                        <a href="#clothing" class="category-link" data-category="clothing">View Products</a>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" 
+                         alt="Home" 
+                         class="category-image">
+                    <div class="category-info">
+                        <h3>Home</h3>
+                        <p>Everything for your home</p>
+                        <a href="#home" class="category-link" data-category="home">View Products</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="featured-section">
+            <div class="section-header">
+                <h2>Featured Products</h2>
+                <p>Check out our most popular products</p>
+            </div>
+            <div id="products" class="product-grid"></div>
+        </div>
+    </div>
+
+    <script>
+        // Constants
+        const API_URL = 'http://localhost:5000/api';
+        let products = [];
+
+        // Initialize the page
+        async function initPage() {
+            try {
+                await fetchProducts();
+                updateCartCount();
+            } catch (err) {
+                showError('Failed to load products');
+            }
+        }
+
+        // Fetch all products
+        async function fetchProducts() {
+            const response = await fetch(`${API_URL}/products`);
+            if (!response.ok) throw new Error('Failed to fetch products');
+            products = await response.json();
+            displayProducts(products);
+        }
+
+        // Display products in the grid
+        function displayProducts(productsToShow) {
+            const productGrid = document.getElementById('products');
+            productGrid.innerHTML = productsToShow.map(product => `
+                <div class="product-card">
+                    <img src="${product.image || 'https://via.placeholder.com/300'}" 
+                         alt="${product.name}"
+                         class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-price">₹${product.price.toFixed(2)}</p>
+                        <button class="add-to-cart" onclick="addToCart('${product._id}')">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter products by category
+        function filterProductsByCategory(category) {
+            const filteredProducts = products.filter(product => 
+                product.category.toLowerCase() === category.toLowerCase()
+            );
+            displayProducts(filteredProducts);
+            
+            // Update active state of category links
+            document.querySelectorAll('.category-link').forEach(link => {
+                if (link.getAttribute('data-category') === category) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+
+        // Handle category clicks
+        document.addEventListener('DOMContentLoaded', () => {
+            initPage();
+            
+            // Add click handlers for category links
+            document.querySelectorAll('.category-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const category = e.target.getAttribute('data-category');
+                    if (category) {
+                        filterProductsByCategory(category);
+                    }
+                });
+            });
+        });
+
+        // Add to cart functionality
+        function addToCart(productId) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingItem = cart.find(item => item.productId === productId);
+
+            if (existingItem) {
+                existingItem.quantity = Math.min(existingItem.quantity + 1, 10);
+            } else {
+                cart.push({ productId, quantity: 1 });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            showNotification('Product added to cart');
+        }
+
+        // Update cart count
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = count;
+        }
+
+        // Show notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'success-message';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 2000);
+        }
+
+        // Show error
+        function showError(message) {
+            alert(message);
+        }
+    </script>
+</body>
+</html>
