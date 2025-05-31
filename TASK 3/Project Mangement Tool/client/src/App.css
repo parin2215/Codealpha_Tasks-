@@ -1,44 +1,40 @@
 .App {
   text-align: center;
+  min-height: 100vh;
+  background-color: var(--background-color-light);
 }
 
 body {
   background-color: var(--background-color-light);
   color: var(--text-color-dark);
+  line-height: 1.6;
 }
-
-/* Custom styles for professional color scheme */
 
 .navbar {
   background-color: var(--background-color-dark) !important;
-  padding: 1rem 3rem; /* Increased horizontal padding for a more spacious feel */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .navbar .navbar-brand {
   color: var(--text-color-light) !important;
-  font-size: 1.4rem; /* Slightly larger font size for brand */
-  font-weight: bold;
-  margin-right: 2rem; /* Increased space between brand and nav links */
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
 }
 
 .navbar .nav-link,
 .navbar .dropdown-toggle {
   color: var(--text-color-light) !important;
-  padding: 0.75rem 1rem; /* Adjusted link padding */
-  margin-right: 0.5rem; /* Reduced margin between links */
-  transition: color 0.3s ease-in-out; /* Smooth color transition on hover */
-}
-
-.navbar .nav-link:last-child,
-.navbar .dropdown-toggle:last-child {
-    margin-right: 0;
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
 }
 
 .navbar .nav-link:hover,
 .navbar .dropdown-toggle:hover {
-  color: var(--secondary-color) !important; /* Change color on hover */
-  text-decoration: none; /* Remove underline on hover if present */
+  color: var(--secondary-color) !important;
+  transform: translateY(-1px);
 }
 
 .navbar-toggler {
@@ -50,13 +46,30 @@ body {
 }
 
 .card {
-  border-color: var(--border-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .card-header {
   background-color: var(--background-color-light);
-  border-bottom-color: var(--border-color);
+  border-bottom: 1px solid var(--border-color);
   color: var(--text-color-dark);
+  font-weight: 600;
+  padding: 1rem 1.5rem;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease-in-out;
 }
 
 .btn-primary {
@@ -65,8 +78,9 @@ body {
 }
 
 .btn-primary:hover {
-  background-color: var(--secondary-color);
-  border-color: var(--secondary-color);
+  background-color: var(--hover-color);
+  border-color: var(--hover-color);
+  transform: translateY(-1px);
 }
 
 .btn-outline-primary {
@@ -78,4 +92,41 @@ body {
   color: var(--text-color-light);
   background-color: var(--primary-color);
   border-color: var(--primary-color);
+  transform: translateY(-1px);
+}
+
+.form-control {
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.alert {
+  border-radius: 0.375rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.alert-success {
+  background-color: rgba(16, 185, 129, 0.1);
+  border-color: var(--success-color);
+  color: var(--success-color);
+}
+
+.alert-warning {
+  background-color: rgba(245, 158, 11, 0.1);
+  border-color: var(--warning-color);
+  color: var(--warning-color);
+}
+
+.alert-error {
+  background-color: rgba(239, 68, 68, 0.1);
+  border-color: var(--error-color);
+  color: var(--error-color);
 }

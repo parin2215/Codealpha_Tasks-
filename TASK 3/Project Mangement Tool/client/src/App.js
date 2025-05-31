@@ -11,6 +11,8 @@ import CreateProject from './pages/CreateProject';
 import ProjectDetail from './pages/ProjectDetail';
 import EditProject from './pages/EditProject';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
+import './App.css';
 
 function App() {
   return (
